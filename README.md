@@ -1,8 +1,8 @@
 
-Image Carving Application
+# Image Carving Application
 This image carving application, developed by Michael Park, is designed to perform content-aware image resizing using the Seam Carving technique. Seam Carving is a method for resizing images while preserving the most important visual content by removing or adding seams of pixels from the image. This technique is particularly useful when traditional resizing methods may result in the distortion or cropping of essential parts of an image.
 
-Introduction
+# Introduction
 Image Carving is a process that involves intelligently resizing an image to meet specific width or height requirements while maintaining the visual integrity of the content. Unlike traditional resizing, which uniformly scales an image, Seam Carving identifies and removes or adds seams, which are continuous paths of pixels, in a way that minimizes the visual impact on the image's content.
 
 How the Dynamic Programming/Backtracking Algorithm Works
@@ -18,7 +18,7 @@ Seam Removal/Addition: The identified seam is removed (or added, depending on th
 
 Repeat: Steps 1 to 4 are repeated iteratively until the desired width or height is achieved.
 
-Setup
+# Setup
 To set up and run this Image Carving application, follow these steps:
 
 Clone the repository from GitHub.
@@ -29,7 +29,7 @@ pip install Pillow
 Run the application by executing the main.py file:
 python main.py
 
-Usage
+# Usage
 Launch the application by following the setup instructions.
 
 When prompted, enter the path to the image file you want to resize.
@@ -40,7 +40,7 @@ The application will perform Seam Carving to resize the image while preserving i
 
 The resized image will be displayed, and you can choose to save it to a file.
 
-Project Structure
+# Project Structure
 The project structure is organized as follows:
 
 main.py: The main entry point of the application, where image carving is performed.
@@ -48,5 +48,6 @@ seamcarving.py: Contains the SeamCarving class, which encapsulates the core Seam
 README.md: This documentation file.
 Dependencies
 Pillow: A Python Imaging Library that is used for image processing.
-Author
+
+# Author
 This Image Carving application was developed by Michael Park.
