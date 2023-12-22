@@ -20,7 +20,7 @@ def main():
 
     # Load image and initialize seam carving
     image_data, w, h = load_image(image_filename)
-    sc = SeamCarving()
+    sc = seamcarving()
 
     # Ask the user for the target width
     target_width = int(input("Enter the target width: "))
