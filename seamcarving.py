@@ -30,3 +30,51 @@ class seamcarving:
         else:
             energy = 0
         return energy
+    
+
+    def compute(self, image):
+        y_max, x_max = len(image), len(image[0])
+
+        # create matrix of energies and initialize dp matrix
+        energy = [[self.compute_energy(image, x, y) for x in range(x_max)] for y in range(y_max)]
+        dp = [[0 for _ in range(x_max)] for _ in range(y_max)]
+
+        # initialize first row of dp matrix with associated energies
+        for x in range(x_max):
+            dp[0][x] = energy[0][x]
+
+        # calculate the minimum energies for each row in dp matrix
+        for y in range(1, y_max):
+            for x in range(0, x_max):
+                # find minimum energy from top left, top, and top right
+                min_energy = dp[y - 1][x]
+                if x > 0:
+                    min_energy = min(min_energy, dp[y - 1][x - 1])
+                if x < x_max - 1:
+                    min_energy = min(min_energy, dp[y - 1][x + 1])
+                dp[y][x] = energy[y][x] + min_energy
+
+        min_energy = float('inf')
+        min_energy_column_index = 0
+
+        # find where the minimum energy seam ends by comparing energies of bottom row
+        for column_index in range(x_max):
+            current_energy = dp[-1][column_index]
+            if current_energy < min_energy:
+                min_energy = current_energy
+                min_energy_column_index = column_index
+        min_seam_end = min_energy_column_index
+
+        self.seam = [min_seam_end]
+        for y in range(y_max - 1, 0, -1):
+            x = self.seam[-1]
+            min_x = max(x - 1, 0)  # cannot be lower than 0
+
+            # Check the pixels above, upper left, and upper right within bounds and finds best seam
+            for dx in range(max(x - 1, 0), min(x + 2, x_max)):
+                if dp[y - 1][dx] < dp[y - 1][min_x]:
+                    min_x = dx
+            self.seam.append(min_x)
+        self.seam.reverse()  # reverse seam
+
+        return dp[-1][min_seam_end]
