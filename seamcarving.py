@@ -78,3 +78,18 @@ class seamcarving:
         self.seam.reverse()  # reverse seam
 
         return dp[-1][min_seam_end]
+    
+
+    def remove_seam(self, image):
+        y_max, x_max = len(image), len(image[0])
+        new_image = [[[0 for _ in range(3)] for _ in range(x_max - 1)] for _ in range(y_max)]
+
+        for y in range(y_max):
+            seam_x = self.seam[y]
+            for x in range(x_max - 1):
+                new_image[y][x] = image[y][x + (x >= seam_x)]
+
+        return new_image
+
+    def getSeam(self):
+        return self.seam
